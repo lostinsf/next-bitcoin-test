@@ -103,7 +103,7 @@ class App extends Component {
         <div className="app">
           <Header title="BITCOIN PRICE INDEX" />
 
-          {/* <div className="select-container">
+          <div className="select-container">
             <span style={{fontSize: 18, fontFamily: 'Bungee'}}> Select your currency: </span>
             <select value={this.state.currency} onChange={this.onCurrencySelect}>
               {currencies.map((obj, index) =>
@@ -119,7 +119,7 @@ class App extends Component {
 
           <div style={{marginTop: 10}}>
             <Line data={this.formatChartData()} height={250} />
-          </div> */}
+          </div>
         </div>
         </>
       )
