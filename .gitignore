@@ -10,7 +10,7 @@
 /build
 
 # next.js
-/.next
+/.next/
 
 # misc
 .DS_Store
