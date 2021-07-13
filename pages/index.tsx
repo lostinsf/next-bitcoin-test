@@ -1,7 +1,5 @@
 import App from './_app';
 
-const Index = () => {
-    <App></App>
-}
+const Index = () => {}
 
 export default Index
