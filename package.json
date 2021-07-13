@@ -1,6 +1,6 @@
 {
-  "name": "bitcoin-price-index",
-  "version": "0.1.0",
+  "name": "next-bitcoin-test",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "chart.js": "^2.7.1",
@@ -11,9 +11,17 @@
     "react-chartjs-2": "^2.6.4",
     "react-dom": "^16.14.0"
   },
+  "devDependencies": {
+    "@types/node": "^12.12.21",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "typescript": "4.0"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node node_modules/next/dist/bin/next start -p 8080"
+    "start": "node node_modules/next/dist/bin/next start -p 8080",
+    "type-check": "tsc"
   }
 }
