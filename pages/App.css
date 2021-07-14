@@ -1,4 +1,9 @@
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Bungee', cursive;
 }
 
@@ -35,8 +40,8 @@ a.link:hover {
   color: #ff1769;
   font-size: 18px;
   max-width: 210px;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .select-container select:focus {
