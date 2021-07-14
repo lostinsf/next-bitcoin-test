@@ -1,65 +1,60 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
 import Head from 'next/head';
 import _ from 'lodash';
-import { Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import { Chart } from 'chart.js';
 import moment from 'moment';
+import Header from './components/Header';
 import currencies from './supported-currencies.json';
 import './index.css';
-import './App.css'
+import './App.css';
 
-console.log(currencies)
+console.log(currencies);
 
 interface MyState {
-  historicalData: string | null, 
-  currency: string,
-  baseUrl: string
+  historicalData: string | null;
+  currency: string;
+  baseUrl: string;
 }
 
-class App extends Component{
-
-  state : MyState;
-  
-  constructor (props) {
-    super(props)
+class App extends Component {
+  constructor(props) {
+    super(props);
 
     // chart.js defaults
     Chart.defaults.global.defaultFontColor = '#000';
     Chart.defaults.global.defaultFontSize = 16;
 
     this.state = {
-      historicalData: null, 
-      currency: "PHP",
-      baseUrl: 'https://api.coindesk.com/'
-    }
+      historicalData: null,
+      currency: 'PHP',
+      baseUrl: 'https://api.coindesk.com/',
+    };
 
-    this.onCurrencySelect = this.onCurrencySelect.bind(this)
+    this.onCurrencySelect = this.onCurrencySelect.bind(this);
   }
 
-  componentDidMount () {
-    this.getBitcoinData()
+  componentDidMount() {
+    this.getBitcoinData();
   }
 
-  getBitcoinData () {
-
-    const {baseUrl, currency} : MyState = this.state
+  getBitcoinData() {
+    const { baseUrl, currency } = this.state;
 
     fetch(`${baseUrl}v1/bpi/historical/close.json?currency=${currency}`)
-      .then(response => response.json())
-      .then(historicalData => this.setState({historicalData}))
-      .catch(e => e)
+      .then((response) => response.json())
+      .then((historicalData) => this.setState({ historicalData }))
+      .catch((e) => e);
   }
 
-  formatChartData () {
-    
-    const {bpi} : any = this.state.historicalData
+  formatChartData() {
+    const { bpi }: any = this.state.historicalData;
 
     return {
-      labels: _.map(_.keys(bpi), date => moment(date).format("ll")),
+      labels: _.map(_.keys(bpi), (date) => moment(date).format('ll')),
       datasets: [
         {
-          label: "Bitcoin",
+          label: 'Bitcoin',
           fill: true,
           lineTension: 0.1,
           backgroundColor: 'rgba(75,192,192,0.4)',
@@ -77,18 +72,18 @@ class App extends Component{
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: _.values(bpi)
-        }
-      ]
-    }
+          data: _.values(bpi),
+        },
+      ],
+    };
   }
 
-  setCurrency (currency) {
-    this.setState({currency}, this.getBitcoinData)
+  setCurrency(currency) {
+    this.setState({ currency }, this.getBitcoinData);
   }
 
-  onCurrencySelect (e) {
-    this.setCurrency(e.target.value)
+  onCurrencySelect(e) {
+    this.setCurrency(e.target.value);
   }
 
   render() {
@@ -104,40 +99,48 @@ class App extends Component{
             <link rel="manifest" href="/manifest.json" />
             <link rel="shortcut icon" href="/favicon.ico" />
             <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet" />
-    
+
             <title>비트코인 사이트 테스트</title>
             <meta name="keywords" content="bitcoin" />
-            <meta
-              name="description"
-              content="테스트 용도로 사용하기 위한 사이트 입니다."
-            />
+            <meta name="description" content="테스트 용도로 사용하기 위한 사이트 입니다." />
           </Head>
           <div className="app">
             <Header title="BITCOIN PRICE INDEX" />
 
             <div className="select-container">
-              <span style={{fontSize: 18, fontFamily: 'Bungee'}}> Select your currency: </span>
+              <span style={{ fontSize: 18, fontFamily: 'Bungee' }}> Select your currency: </span>
               <select value={this.state.currency} onChange={this.onCurrencySelect}>
-                {currencies.map((obj, index) =>
-                  <option key={`${index}-${obj.country}`} value={obj.currency}> {obj.country} </option>
-                )}
+                {currencies.map((obj, index) => (
+                  <option key={`${index}-${obj.country}`} value={obj.currency}>
+                    {' '}
+                    {obj.country}{' '}
+                  </option>
+                ))}
               </select>
-              {
-                this.state.currency !== 'PHP' && (<div>
-                  <a href="#" className="link" onClick={() => this.setCurrency('PHP')} style={{color: "black", fontSize: 16, fontFamily: 'Bungee'}}> [CLICK HERE TO RESET] </a>
-                </div>)
-              }
+              {this.state.currency !== 'PHP' && (
+                <div>
+                  <a
+                    href="#"
+                    className="link"
+                    onClick={() => this.setCurrency('PHP')}
+                    style={{ color: 'black', fontSize: 16, fontFamily: 'Bungee' }}
+                  >
+                    {' '}
+                    [CLICK HERE TO RESET]{' '}
+                  </a>
+                </div>
+              )}
             </div>
 
-            <div style={{marginTop: 10}}>
+            <div style={{ marginTop: 10 }}>
               <Line data={this.formatChartData()} height={250} />
             </div>
           </div>
         </div>
-      )
+      );
     }
 
-    return null
+    return null;
   }
 }
 
