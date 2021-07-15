@@ -502,9 +502,9 @@ For example, this:
 
 ```css
 .App {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
 }
 ```
 
@@ -512,16 +512,16 @@ becomes this:
 
 ```css
 .App {
+          align-items: center;
+  -webkit-box-align: center;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
+      -ms-flex-align: center;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 ```
 
@@ -2227,5 +2227,6 @@ In the future, we might start automatically compiling incompatible third-party m
 ## Something Missing?
 
 If you have ideas for more “How To” recipes that should be on this page, [let us know](https://github.com/facebookincubator/create-react-app/issues) or [contribute some!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
-#   n e x t - b i t c o i n - t e s t  
+#   n e x t - b i t c o i n - t e s t 
+ 
  

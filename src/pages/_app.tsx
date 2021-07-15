@@ -4,12 +4,10 @@ import _ from 'lodash';
 import { Line } from 'react-chartjs-2';
 import { Chart } from 'chart.js';
 import moment from 'moment';
-import Header from './components/Header';
-import currencies from './supported-currencies.json';
+import Header from '../components/header';
+import currencies from '../../pages/supported-currencies.json';
 import './index.css';
 import './App.css';
-
-console.log(currencies);
 
 interface MyState {
   historicalData: string | null;
@@ -123,8 +121,7 @@ class App extends Component {
                     href="#"
                     className="link"
                     onClick={() => this.setCurrency('PHP')}
-                    style={{ color: 'black', fontSize: 16, fontFamily: 'Bungee' }}
-                  >
+                    style={{ color: 'black', fontSize: 16, fontFamily: 'Bungee' }}>
                     {' '}
                     [CLICK HERE TO RESET]{' '}
                   </a>
