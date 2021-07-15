@@ -1,7 +1,7 @@
-import App from './_app';
+import App from 'src/pages/_app';
 
-const Index = () => {
-  <App />;
-};
+function HomePage(): JSX.Element {
+  return <App />;
+}
 
-export default Index;
+export default HomePage;
