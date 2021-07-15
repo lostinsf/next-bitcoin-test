@@ -1,2 +1,7 @@
-/node_modules
 /with-typescript-app
+
+/node_modules
+/public
+/dist
+/.next
+/coverage
