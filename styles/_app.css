@@ -17,30 +17,15 @@ span.bungee {
   text-align: center;
 }
 
-.header {
+.select-container span {
   font-family: 'Bungee', cursive;
-  font-size: 60px;
+  font-size: 18px;
 }
-.subheader {
-  font-family: 'Bungee', cursive;
-  font-size: 20px;
-}
-
-a.link {
-  color: #ff1769;
-  text-decoration: none;
-}
-
-a.link:hover {
-  border-bottom: 2px solid #000;
-  text-decoration: none;
-}
-
 .select-container select {
   -webkit-appearance: none;
   background: transparent;
   background-image: none;
-  border: none;
+  border: unset;
   box-shadow: none;
   color: #ff1769;
   cursor: pointer;
@@ -51,7 +36,16 @@ a.link:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.select-container a {
+  color: 'black';
+  font-family: 'Bungee', cursive;
+  font-size: 16px;
+}
 
 .select-container select:focus {
   outline: none;
+}
+
+.lineData {
+  margin-top: 10px;
 }

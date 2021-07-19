@@ -1,0 +1,26 @@
+header {
+  margin-bottom: 10px;
+}
+
+.header {
+  font-family: 'Bungee', cursive;
+  font-size: 60px;
+}
+.subheader {
+  font-family: 'Bungee', cursive;
+  font-size: 20px;
+}
+
+a.link {
+  color: #ff1769;
+  text-decoration: none;
+}
+
+a.link:hover {
+  border-bottom: 2px solid #000;
+  text-decoration: none;
+}
+
+Line{
+
+}

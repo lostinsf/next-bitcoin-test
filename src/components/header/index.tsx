@@ -9,11 +9,10 @@ function Header(props: HeaderProps): JSX.Element {
   const { title } = props;
 
   return (
-    <header style={{ marginBottom: 10 }}>
+    <header>
       <div>
         <span className="header"> {title} </span>
       </div>
-
       <div className="subheader-body">
         <span className="subheader">
           {' '}

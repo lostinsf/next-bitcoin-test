@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import _ from 'lodash';
@@ -7,8 +7,9 @@ import { Chart } from 'chart.js';
 import moment from 'moment';
 import currencies from 'public/supported-currencies.json';
 import Header from 'src/components/header';
+import 'styles/components/header.css';
+import 'styles/_app.css';
 import 'styles/index.css';
-import 'styles/App.css';
 
 interface AppState {
   historicalData: any;
@@ -101,7 +102,7 @@ function MyApp(): JSX.Element {
         <Header title="BITCOIN PRICE INDEX" />
 
         <div className="select-container">
-          <span style={{ fontSize: 18, fontFamily: 'Bungee' }}> Select your currency: </span>
+          <span> Select your currency: </span>
           <select value={state.currency} onChange={onCurrencySelect}>
             {currencies.map((obj, index) => (
               <option key={`${index}-${obj.country}`} value={obj.currency}>
@@ -112,11 +113,7 @@ function MyApp(): JSX.Element {
           </select>
           {state.currency !== 'PHP' && (
             <div>
-              <a
-                href="#"
-                className="link"
-                onClick={() => setCurrency('PHP')}
-                style={{ color: 'black', fontSize: 16, fontFamily: 'Bungee' }}>
+              <a href="#" className="link" onClick={() => setCurrency('PHP')}>
                 {' '}
                 [CLICK HERE TO RESET]{' '}
               </a>
@@ -124,7 +121,7 @@ function MyApp(): JSX.Element {
           )}
         </div>
 
-        <div style={{ marginTop: 10 }}>
+        <div className="lineData">
           <Line data={formatChartData()} height={250} />
         </div>
       </div>
