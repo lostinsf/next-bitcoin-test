@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Head from 'next/head';
-import { AppProps } from 'next/app';
 import _ from 'lodash';
 import { Line } from 'react-chartjs-2';
 import { Chart } from 'chart.js';
@@ -13,34 +12,41 @@ import 'styles/index.css';
 
 interface AppState {
   historicalData: any;
-  currency: string;
   baseUrl: string;
 }
 
 const initAppStates: AppState = {
   historicalData: null,
-  currency: 'PHP',
   baseUrl: 'https://api.coindesk.com/',
 };
 
-function MyApp(): JSX.Element {
-  const [state, setState] = useState<AppState>(initAppStates);
+// chart.js defaults
+Chart.defaults.global.defaultFontColor = '#000';
+Chart.defaults.global.defaultFontSize = 16;
 
-  useEffect(() => {
-    const getBitcoinData = (): void => {
-      fetch(`${state.baseUrl}v1/bpi/historical/close.json?currency=${state.currency}`)
+function MyApp(): JSX.Element {
+  const [isLoading, setLoading] = useState<boolean>(false);
+
+  const [state, setState] = useState<AppState>(initAppStates);
+  const [currency, setCurrency] = useState<string>('PHP');
+
+  const getBitcoinData = useCallback(
+    (currency = 'PHP'): void => {
+      setLoading(true);
+      fetch(`${state.baseUrl}v1/bpi/historical/close.json?currency=${currency}`)
         .then((response) => response.json())
         .then((response) => {
           setState({ ...state, historicalData: response });
         })
-        .catch((e) => e);
-    };
+        .catch((e) => e)
+        .finally(() => setLoading(false));
+    },
+    [state.baseUrl],
+  );
+
+  useEffect(() => {
     getBitcoinData();
   }, []);
-
-  // chart.js defaults
-  Chart.defaults.global.defaultFontColor = '#000';
-  Chart.defaults.global.defaultFontSize = 16;
 
   const formatChartData = (): any => {
     if (!state.historicalData) {
@@ -76,12 +82,8 @@ function MyApp(): JSX.Element {
     };
   };
 
-  const setCurrency = (changeCurrency: string): void => {
-    setState({ ...state, currency: changeCurrency });
-  };
-
-  const onCurrencySelect = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setCurrency(e.target.value);
+  const onCurrencySelect = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    getBitcoinData(e.target.value);
   }, []);
 
   return (
@@ -99,31 +101,37 @@ function MyApp(): JSX.Element {
         <meta name="description" content="테스트 용도로 사용하기 위한 사이트 입니다." />
       </Head>
       <div className="app">
-        <Header title="BITCOIN PRICE INDEX" />
+        {isLoading ? (
+          <div>Loading ...</div>
+        ) : (
+          <>
+            <Header title="BITCOIN PRICE INDEX" />
 
-        <div className="select-container">
-          <span> Select your currency: </span>
-          <select value={state.currency} onChange={onCurrencySelect}>
-            {currencies.map((obj, index) => (
-              <option key={`${index}-${obj.country}`} value={obj.currency}>
-                {' '}
-                {obj.country}{' '}
-              </option>
-            ))}
-          </select>
-          {state.currency !== 'PHP' && (
-            <div>
-              <a href="#" className="link" onClick={() => setCurrency('PHP')}>
-                {' '}
-                [CLICK HERE TO RESET]{' '}
-              </a>
+            <div className="select-container">
+              <span> Select your currency: </span>
+              <select value={currency} onChange={onCurrencySelect}>
+                {currencies.map((obj) => (
+                  <option key={obj.currency} value={obj.currency}>
+                    {' '}
+                    {obj.country}{' '}
+                  </option>
+                ))}
+              </select>
+              {currency !== 'PHP' && (
+                <div>
+                  <a href="#" className="link" onClick={() => setCurrency('PHP')}>
+                    {' '}
+                    [CLICK HERE TO RESET]{' '}
+                  </a>
+                </div>
+              )}
             </div>
-          )}
-        </div>
 
-        <div className="lineData">
-          <Line data={formatChartData()} height={250} />
-        </div>
+            <div className="lineData">
+              <Line data={formatChartData()} height={250} />
+            </div>
+          </>
+        )}
       </div>
     </>
   );
