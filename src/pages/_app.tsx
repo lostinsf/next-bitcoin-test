@@ -10,50 +10,35 @@ import 'styles/components/header.css';
 import 'styles/_app.css';
 import 'styles/index.css';
 
-interface AppState {
+// 1. 내부 인터페이스 및 초기화 설정
+interface IMyAppObjects {
   historicalData: any;
   baseUrl: string;
 }
 
-const initAppStates: AppState = {
+const initMyAppObjects: IMyAppObjects = {
   historicalData: null,
   baseUrl: 'https://api.coindesk.com/',
 };
 
-// chart.js defaults
+// 2. 글로벌 초기값 설정
 Chart.defaults.global.defaultFontColor = '#000';
 Chart.defaults.global.defaultFontSize = 16;
 
+// 3. 글로벌 헤더 설정
 function MyApp(): JSX.Element {
+  // 3.1. 내부 변수
   const [isLoading, setLoading] = useState<boolean>(false);
-
-  const [state, setState] = useState<AppState>(initAppStates);
+  const [object, setObject] = useState<IMyAppObjects>(initMyAppObjects);
   const [currency, setCurrency] = useState<string>('PHP');
 
-  const getBitcoinData = useCallback(
-    (currency = 'PHP'): void => {
-      setLoading(true);
-      fetch(`${state.baseUrl}v1/bpi/historical/close.json?currency=${currency}`)
-        .then((response) => response.json())
-        .then((response) => {
-          setState({ ...state, historicalData: response });
-        })
-        .catch((e) => e)
-        .finally(() => setLoading(false));
-    },
-    [state.baseUrl],
-  );
-
-  useEffect(() => {
-    getBitcoinData();
-  }, []);
-
+  // 3.2. 내부 함수
   const formatChartData = (): any => {
-    if (!state.historicalData) {
+    if (!object.historicalData) {
       return {};
     }
 
-    const { bpi }: any = state.historicalData;
+    const { bpi }: any = object.historicalData;
     return {
       labels: _.map(_.keys(bpi), (date) => moment(date).format('ll')),
       datasets: [
@@ -82,8 +67,30 @@ function MyApp(): JSX.Element {
     };
   };
 
+  // 3.3. 내부 콜백 함수
+  const getBitcoinData = useCallback(
+    (currency): void => {
+      setLoading(true);
+      fetch(`${object.baseUrl}v1/bpi/historical/close.json?currency=${currency}`)
+        .then((response) => response.json())
+        .then((response) => {
+          setObject({ ...object, historicalData: response });
+        })
+        .catch((e) => e)
+        .finally(() => setLoading(false));
+    },
+    [object.baseUrl],
+  );
+
   const onCurrencySelect = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     getBitcoinData(e.target.value);
+    setCurrency(e.target.value);
+  }, []);
+
+  // 3.4. 내부 효과 함수
+
+  useEffect(() => {
+    getBitcoinData(currency);
   }, []);
 
   return (
