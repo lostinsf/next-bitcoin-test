@@ -1,3 +1,5 @@
+@import './_app.css';
+
 header {
   margin-bottom: 10px;
 }
@@ -19,8 +21,4 @@ a.link {
 a.link:hover {
   border-bottom: 2px solid #000;
   text-decoration: none;
-}
-
-Line{
-
 }
