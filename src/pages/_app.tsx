@@ -6,8 +6,7 @@ import { Chart } from 'chart.js';
 import moment from 'moment';
 import currencies from 'public/supported-currencies.json';
 import Header from 'src/components/header';
-import 'styles/components/header.css';
-import 'styles/_app.css';
+import 'styles/header.css';
 import 'styles/index.css';
 
 // 1. 내부 인터페이스 및 초기화 설정
