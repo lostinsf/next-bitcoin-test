@@ -4,9 +4,11 @@ import IsEqual from 'react-fast-compare';
 function PageLoading(): JSX.Element {
   return (
     <>
-      <div className="container">
-        <div className="bar">
-          <div className="spinner" />
+      <div className="pageLoading">
+        <div className="container">
+          <div className="bar">
+            <div className="spinner" />
+          </div>
         </div>
       </div>
     </>
