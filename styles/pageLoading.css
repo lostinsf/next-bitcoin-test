@@ -1,23 +1,22 @@
 @import './_app.css';
 
-/* .container {
-    opacity: ${isFinished ? 0 : 1};
-    pointerevents: none;
-    transition: opacity ${animationDuration}ms linear;
-  }
-  .bar {
-    background: #29d;
-    height: 6px;
-    left: 0;
-    margin-left: ${(-1 + progress) * 100}%;
-    position: fixed;
-    top: 0;
-    transition: margin-left ${animationDuration}ms linear;
-    width: 100%;
-    z-index: 1031;
-  } */
+.pageLoading .container {
+  opacity: var(--isFinished);
+  transition: opacity var(--animationDuration) linear;
+}
+.pageLoading .bar {
+  background: #29d;
+  height: 6px;
+  left: 0;
+  margin-left: calc((-1 + var(--progressValue)) * 100%);
+  position: fixed;
+  top: 0;
+  transition: margin-left var(--animationDuration) linear;
+  width: 100%;
+  z-index: 1031;
+}
 
-.spinner {
+.pageLoading .spinner {
   box-shadow: 0 0 10px #29d, 0 0 5px #29d;
   display: block;
   height: 100%;

@@ -1,12 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Head from 'next/head';
+import Header from 'src/components/header';
+import Footer from 'src/components/footer';
 import _ from 'lodash';
 import { Line } from 'react-chartjs-2';
 import { Chart } from 'chart.js';
 import moment from 'moment';
 import currencies from 'public/supported-currencies.json';
-import Header from 'src/components/header';
+import PageLoading from '../components/pageLoading';
+import 'styles/pageLoading.css';
 import 'styles/header.css';
+import 'styles/footer.css';
 import 'styles/index.css';
 
 // 1. 내부 인터페이스 및 초기화 설정
@@ -24,7 +28,6 @@ const initMyAppObjects: IMyAppObjects = {
 Chart.defaults.global.defaultFontColor = '#000';
 Chart.defaults.global.defaultFontSize = 16;
 
-// 3. 글로벌 헤더 설정
 function MyApp(): JSX.Element {
   // 3.1. 내부 변수
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -106,13 +109,13 @@ function MyApp(): JSX.Element {
         <title>비트코인 사이트 테스트</title>
         <meta name="description" content="테스트 용도로 사용하기 위한 사이트 입니다." />
       </Head>
+      <PageLoading />
+      <Header title="BITCOIN PRICE INDEX" />
       <div className="app">
         {isLoading ? (
           <div>Loading ...</div>
         ) : (
           <>
-            <Header title="BITCOIN PRICE INDEX" />
-
             <div className="select-container">
               <span> Select your currency: </span>
               <select value={currency} onChange={onCurrencySelect}>
@@ -139,6 +142,7 @@ function MyApp(): JSX.Element {
           </>
         )}
       </div>
+      <Footer title="BITCOIN PRICE INDEX" />
     </>
   );
 }
