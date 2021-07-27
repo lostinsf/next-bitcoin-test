@@ -7,6 +7,8 @@
     "lodash": "^4.17.4",
     "moment": "^2.19.4",
     "next": "^10.0.0",
+    "next-seo": "^4.26.0",
+    "pusher-js": "^7.0.3",
     "react": "^16.14.0",
     "react-chartjs-2": "^2.6.4",
     "react-dom": "^16.14.0",

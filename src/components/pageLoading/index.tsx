@@ -1,15 +1,29 @@
 import React from 'react';
 import IsEqual from 'react-fast-compare';
 
-function PageLoading(): JSX.Element {
+interface IPageLoadingProps {
+  isRouteChanging: boolean;
+}
+
+function PageLoading(props: IPageLoadingProps): JSX.Element {
+  const { isRouteChanging } = props;
+
   return (
     <>
       <div className="pageLoading">
-        <div className="container">
-          <div className="bar">
-            <div className="spinner" />
+        {isRouteChanging ? (
+          <div className="container loading">
+            <div className="bar">
+              <div className="spinner" />
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="container">
+            <div className="bar">
+              <div className="spinner" />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

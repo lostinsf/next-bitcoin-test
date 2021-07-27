@@ -1,19 +1,34 @@
 @import './_app.css';
 
 .pageLoading .container {
-  opacity: var(--isFinished);
+  opacity: 0;
+}
+.pageLoading .container.loading {
+  opacity: 1;
   transition: opacity var(--animationDuration) linear;
 }
 .pageLoading .bar {
   background: #29d;
   height: 6px;
   left: 0;
-  margin-left: calc((-1 + var(--progressValue)) * 100%);
+  margin-left: -100%;
   position: fixed;
   top: 0;
-  transition: margin-left var(--animationDuration) linear;
   width: 100%;
   z-index: 1031;
+}
+.pageLoading .container.loading .bar {
+  animation: progressUp var(--animationDuration) linear;
+  margin-left: 0%;
+}
+
+@keyframes progressUp {
+  0% {
+    margin-left: -100%;
+  }
+  100% {
+    margin-left: 0%;
+  }
 }
 
 .pageLoading .spinner {
