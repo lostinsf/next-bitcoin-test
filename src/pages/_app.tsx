@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Header from 'src/components/header';
 import Footer from 'src/components/footer';
 import _ from 'lodash';
@@ -14,6 +15,16 @@ import 'styles/footer.css';
 import 'styles/index.css';
 
 // 1. 내부 인터페이스 및 초기화 설정
+interface IMyAppStates {
+  isRouteChanging: boolean;
+  loadingKey: number;
+}
+
+const initMyAppStates: IMyAppStates = {
+  isRouteChanging: false,
+  loadingKey: 0,
+};
+
 interface IMyAppObjects {
   historicalData: any;
   baseUrl: string;
@@ -30,11 +41,28 @@ Chart.defaults.global.defaultFontSize = 16;
 
 function MyApp(): JSX.Element {
   // 3.1. 내부 변수
+  const router = useRouter();
+  const [state, setState] = useState<IMyAppStates>(initMyAppStates);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [object, setObject] = useState<IMyAppObjects>(initMyAppObjects);
-  const [currency, setCurrency] = useState<string>('PHP');
+  const [currency, setCurrency] = useState<string>('KRW');
 
   // 3.2. 내부 함수
+  const handleRouteChangeStart = (): void => {
+    setState((prevState) => ({
+      ...prevState,
+      isRouteChanging: true,
+      loadingKey: prevState.loadingKey + 1,
+    }));
+  };
+
+  const handleRouteChangeEnd = (): void => {
+    setState((prevState) => ({
+      ...prevState,
+      isRouteChanging: false,
+    }));
+  };
+
   const formatChartData = (): any => {
     if (!object.historicalData) {
       return {};
@@ -90,10 +118,19 @@ function MyApp(): JSX.Element {
   }, []);
 
   // 3.4. 내부 효과 함수
-
   useEffect(() => {
+    router.events.on('routeChangeStart', handleRouteChangeStart);
+    router.events.on('routeChangeComplete', handleRouteChangeEnd);
+    router.events.on('routeChangeError', handleRouteChangeEnd);
+
     getBitcoinData(currency);
-  }, []);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChangeStart);
+      router.events.off('routeChangeComplete', handleRouteChangeEnd);
+      router.events.off('routeChangeError', handleRouteChangeEnd);
+    };
+  }, [router.events]);
 
   return (
     <>
@@ -109,40 +146,45 @@ function MyApp(): JSX.Element {
         <title>비트코인 사이트 테스트</title>
         <meta name="description" content="테스트 용도로 사용하기 위한 사이트 입니다." />
       </Head>
-      <PageLoading />
-      <Header title="BITCOIN PRICE INDEX" />
-      <div className="app">
-        {isLoading ? (
-          <div>Loading ...</div>
-        ) : (
-          <>
-            <div className="select-container">
-              <span> Select your currency: </span>
-              <select value={currency} onChange={onCurrencySelect}>
-                {currencies.map((obj) => (
-                  <option key={obj.currency} value={obj.currency}>
-                    {' '}
-                    {obj.country}{' '}
-                  </option>
-                ))}
-              </select>
-              {currency !== 'PHP' && (
-                <div>
-                  <a href="#" className="link" onClick={() => setCurrency('PHP')}>
-                    {' '}
-                    [CLICK HERE TO RESET]{' '}
-                  </a>
+      <PageLoading isRouteChanging={state.isRouteChanging} key={state.loadingKey} />
+      {state.isRouteChanging ? (
+        <div>Page Loading ...</div>
+      ) : (
+        <>
+          <Header title="BITCOIN PRICE INDEX" />
+          <div className="app">
+            {isLoading ? (
+              <div>Search Loading ...</div>
+            ) : (
+              <>
+                <div className="select-container">
+                  <span> Select your currency: </span>
+                  <select value={currency} onChange={onCurrencySelect}>
+                    {currencies.map((obj) => (
+                      <option key={obj.currency} value={obj.currency}>
+                        {' '}
+                        {obj.country}{' '}
+                      </option>
+                    ))}
+                  </select>
+                  {currency !== 'KRW' && (
+                    <div>
+                      <a href="#" className="link" onClick={() => setCurrency('KRW')}>
+                        {' '}
+                        [CLICK HERE TO RESET]{' '}
+                      </a>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-
-            <div className="lineData">
-              <Line data={formatChartData()} height={250} />
-            </div>
-          </>
-        )}
-      </div>
-      <Footer title="BITCOIN PRICE INDEX" />
+                <div className="lineData">
+                  <Line data={formatChartData()} height={250} />
+                </div>
+              </>
+            )}
+          </div>
+          <Footer title="BITCOIN PRICE INDEX" />
+        </>
+      )}
     </>
   );
 }

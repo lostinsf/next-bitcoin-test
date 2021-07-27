@@ -3,7 +3,5 @@
 :root {
   --footer-color: #fff;
   --footer-border-top-color: #e4e9f0;
-  --isFinished: 1;
   --animationDuration: 3s;
-  --progressValue: 50;
 }
