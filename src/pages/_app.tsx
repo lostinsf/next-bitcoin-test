@@ -45,7 +45,7 @@ function MyApp(): JSX.Element {
   const [state, setState] = useState<IMyAppStates>(initMyAppStates);
   const [isLoading, setLoading] = useState<boolean>(false);
   const [object, setObject] = useState<IMyAppObjects>(initMyAppObjects);
-  const [currency, setCurrency] = useState<string>('PHP');
+  const [currency, setCurrency] = useState<string>('KRW');
 
   // 3.2. 내부 함수
   const handleRouteChangeStart = (): void => {
@@ -167,9 +167,9 @@ function MyApp(): JSX.Element {
                       </option>
                     ))}
                   </select>
-                  {currency !== 'PHP' && (
+                  {currency !== 'KRW' && (
                     <div>
-                      <a href="#" className="link" onClick={() => setCurrency('PHP')}>
+                      <a href="#" className="link" onClick={() => setCurrency('KRW')}>
                         {' '}
                         [CLICK HERE TO RESET]{' '}
                       </a>
