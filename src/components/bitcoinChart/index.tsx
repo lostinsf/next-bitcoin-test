@@ -5,6 +5,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart } from 'chart.js';
 import moment from 'moment';
 import currencies from 'public/supported-currencies.json';
+import { BitcoinChartWrapper, SelectContainer, LineData } from './styles';
 
 interface IMyAppObjects {
   historicalData: any;
@@ -83,12 +84,12 @@ function BitcoinChart(): JSX.Element {
   }, []);
 
   return (
-    <div className="bitcoinChart">
+    <BitcoinChartWrapper>
       {isLoading ? (
         <div>Search Loading ...</div>
       ) : (
         <>
-          <div className="select-container">
+          <SelectContainer>
             <span> Select your currency: </span>
             <select value={currency} onChange={onCurrencySelect}>
               {currencies.map((obj) => (
@@ -106,13 +107,13 @@ function BitcoinChart(): JSX.Element {
                 </a>
               </div>
             )}
-          </div>
-          <div className="lineData">
+          </SelectContainer>
+          <LineData>
             <Line data={formatChartData()} height={250} />
-          </div>
+          </LineData>
         </>
       )}
-    </div>
+    </BitcoinChartWrapper>
   );
 }
 

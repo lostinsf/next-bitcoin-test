@@ -3,10 +3,6 @@ import Head from 'next/head';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import PageLoading from 'src/components/pageLoading';
-import 'src/styles/pageLoading.css';
-import 'src/styles/header.css';
-import 'src/styles/footer.css';
-import 'src/styles/bitcoinChart.css';
 import 'src/styles/index.css';
 
 // 1. 내부 인터페이스 및 초기화 설정

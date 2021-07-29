@@ -1,6 +1,7 @@
 import React from 'react';
 import IsEqual from 'react-fast-compare';
-import { BitcoinChart, Footer, Header } from '../../components';
+import { BitcoinChart, Footer, Header } from '@/components';
+import {} from './styles';
 
 function Intro(): JSX.Element {
   return (

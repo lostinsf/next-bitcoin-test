@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo';
-import { Intro } from 'src/containers';
+import { Intro } from '@/containers';
 
 function HomePage(): JSX.Element {
   return (

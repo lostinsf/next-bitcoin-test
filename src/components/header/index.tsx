@@ -1,5 +1,6 @@
 import React from 'react';
 import IsEqual from 'react-fast-compare';
+import { HeaderWrapper, HeaderTitle, HeaderSubTitle } from './styles';
 
 interface HeaderProps {
   title: string;
@@ -9,21 +10,21 @@ function Header(props: HeaderProps): JSX.Element {
   const { title } = props;
 
   return (
-    <header>
+    <HeaderWrapper>
       <div>
-        <span className="header"> {title} </span>
+        <HeaderTitle> {title} </HeaderTitle>
       </div>
       <div className="subheader-body">
-        <span className="subheader">
+        <HeaderSubTitle>
           {' '}
           Powered by{' '}
           <a className="link" target="_blank" href="https://www.coindesk.com/price/" rel="noreferrer">
             CoinDesk
           </a>
           .{' '}
-        </span>
+        </HeaderSubTitle>
       </div>
-    </header>
+    </HeaderWrapper>
   );
 }
 
