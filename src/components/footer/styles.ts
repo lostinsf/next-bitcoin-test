@@ -1,27 +1,26 @@
 import styled from '@emotion/styled';
 import { down } from 'styled-breakpoints';
+import { lightTheme } from '@/styles/theme';
 
 export const FooterWrapper = styled.footer`
-  padding: 0 32rem;
+  color: ${lightTheme.colors.black500};
+  font-size: 20px;
+  height: 100%;
+  position: relative;
+  width: 100%;
 
   ${down('lg')} {
-    padding: 0 16rem;
+    font-size: 16px;
   }
 
   ${down('md')} {
-    padding: 0 8rem;
+    font-size: 12px;
   }
 `;
 
 export const FooterInner = styled.div`
-  border-top: 1px solid var(--footer-border-top-color);
-  padding-top: 32rem;
-  text-align: center;
-
-  ${down('lg')} {
-    padding-top: 16rem;
-  }
-  ${down('md')} {
-    padding-top: 8rem;
-  }
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;

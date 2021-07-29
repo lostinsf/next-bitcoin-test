@@ -1,14 +1,15 @@
 import React from 'react';
 import IsEqual from 'react-fast-compare';
-import { BitcoinChart, Footer, Header } from '@/components';
+import { BitcoinChart } from '@/components';
+import { MainLayout } from '@/layouts';
 import {} from './styles';
 
 function Intro(): JSX.Element {
   return (
     <>
-      <Header title="welcome bitcoin test center" />
-      <BitcoinChart />
-      <Footer title="welcome bitcoin test center" />
+      <MainLayout>
+        <BitcoinChart />
+      </MainLayout>
     </>
   );
 }

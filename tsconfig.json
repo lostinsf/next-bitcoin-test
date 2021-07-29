@@ -24,7 +24,7 @@
     // See https://emotion.sh/docs/css-prop#babel-preset Babel preset vs JSX pragma configuration
     // See https://github.com/emotion-js/emotion/issues/1606#issuecomment-757930872 Issue explanation when migrating from Emotion 10 to 11
     // See https://github.com/UnlyEd/next-right-now/pull/247 Emotion v10 > v11 migration pull request
-    "jsxImportSource": "@emotion/react",
+    //"jsxImportSource": "@emotion/react",
     "paths": {
       "@/*": ["src/*"],
       "@server/*": ["server/*"]

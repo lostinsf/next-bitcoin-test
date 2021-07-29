@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { lightTheme } from '@/styles/theme';
 
 interface ILoadingWrapperProps {
   isFinished: boolean;
@@ -15,7 +16,7 @@ interface IProgressBarProps {
   animationDuration: number;
 }
 export const ProgressBar = styled.div<IProgressBarProps>`
-  background: #29d;
+  background: ${lightTheme.colors.blue};
   height: 2px;
   left: 0;
   margin-left: ${(props) => (-1 + props.progress) * 100}%;
@@ -27,7 +28,7 @@ export const ProgressBar = styled.div<IProgressBarProps>`
 `;
 
 export const Spinner = styled.div`
-  box-shadow: 0 0 10px #29d, 0 0 5px #29d;
+  box-shadow: 0 0 10px ${lightTheme.colors.blue}, 0 0 5px ${lightTheme.colors.blue};
   display: block;
   height: 100%;
   opacity: 1;
