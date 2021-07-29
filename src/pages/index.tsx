@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo';
-import Home from 'src/pages/_app';
+import Home from 'src/containers';
 
 function HomePage(): JSX.Element {
   return (
