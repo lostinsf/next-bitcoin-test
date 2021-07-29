@@ -61,12 +61,18 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="theme-color" content="#000000" />
         <meta httpEquiv="X-UA-Compatible" content="chrome=1" />
-
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet" />
-        <title>비트코인 사이트 테스트</title>
         <meta name="description" content="테스트 용도로 사용하기 위한 사이트 입니다." />
+        <meta name="robots" content="index, follow" />
+        <meta key="googlebot" name="googlebot" content="index, follow" />
+        <meta name="google" content="notranslate" />
+        <meta property="og:locale" content="ko-KR" />
+        <meta property="og:site_name" content="비트코인사이트 - 테스트용" />
+        <meta property="og:title" content="비트코인사이트 - 테스트용" />
+        <meta property="og:description" content="테스트 용도로 사용하기 위한 사이트 입니다." />
+        <meta property="og:url" content="https://pekr.pe.kr" />
+        <meta property="og:image" content="" />
+
+        <title>비트코인 사이트 테스트</title>
       </Head>
       <PageLoading isRouteChanging={state.isRouteChanging} key={state.loadingKey} />
       <Component {...pageProps} />
