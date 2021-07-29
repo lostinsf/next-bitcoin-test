@@ -5,9 +5,7 @@ import { lightTheme } from '@/styles/theme';
 export const FooterWrapper = styled.footer`
   color: ${lightTheme.colors.black500};
   font-size: 20px;
-  height: 100%;
   position: relative;
-  width: 100%;
 
   ${down('lg')} {
     font-size: 16px;
@@ -19,8 +17,5 @@ export const FooterWrapper = styled.footer`
 `;
 
 export const FooterInner = styled.div`
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  text-align: center;
 `;

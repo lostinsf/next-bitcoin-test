@@ -14,7 +14,7 @@ function Header(props: HeaderProps): JSX.Element {
       <div>
         <HeaderTitle> {title} </HeaderTitle>
       </div>
-      <div className="subheader-body">
+      <div>
         <HeaderSubTitle>
           {' '}
           Powered by{' '}
